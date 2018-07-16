@@ -1,2 +1,5 @@
 .pioenvs
 .piolibdeps
+
+Thumbs.db
+.DS_Store
