@@ -1,8 +1,13 @@
 build: off
 
+image:
+    - Visual Studio 2015
+    - Ubuntu
+
 install:
     - cmd: SET PATH=%PATH%;C:\Python27\Scripts
     - cmd: pip install -U platformio
+    - sh: pip install -U --user platformio
 
 test_script:
-    - cmd: platformio run
+    - platformio run
