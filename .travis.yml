@@ -14,18 +14,29 @@
 #   < http://docs.platformio.org/page/userguide/cmd_ci.html >
 #
 
-language: python
-python:
-    - "2.7"
+matrix:
+  include:
+    - os: linux
+      dist: trusty
+      sudo: false
+      language: python
+      python: "2.7"
+      env: INSTALL_PIO_WITH=pip
+    - os: osx
+      osx_image: xcode9.4
+      env: INSTALL_PIO_WITH=homebrew
 
-sudo: false
 cache:
     directories:
         - "~/.platformio"
 
 install:
-    - pip install -U platformio
-    - platformio update
+    - |
+      if [ $INSTALL_PIO_WITH = "pip" ]; then
+          pip install -U platformio
+      elif [ $INSTALL_PIO_WITH = "homebrew" ]; then
+          brew install platformio
+      fi
 
 script:
     - platformio run
